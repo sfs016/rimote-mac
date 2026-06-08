@@ -1,0 +1,28 @@
+# macOS
+.DS_Store
+
+# Swift Package Manager
+.build/
+.swiftpm/
+Package.resolved
+
+# Xcode
+build/
+DerivedData/
+*.xcuserstate
+*.xcscmblueprint
+xcuserdata/
+*.moved-aside
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Xcode user-specific scheme management (keep shared schemes)
+**/xcshareddata/xcschemes/xcschememanagement.plist
+
+# Signing / secrets
+*.p12
+*.mobileprovision
+*.cer
+ExportOptions.plist
