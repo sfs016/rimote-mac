@@ -84,13 +84,32 @@ cd rimote-mac
 xcodebuild -project Rimote.xcodeproj -scheme Rimote -configuration Release build
 ```
 
-Or open `Rimote.xcodeproj` in Xcode, select the **Rimote** scheme, and run.
+Or open `Rimote.xcodeproj` in Xcode, select the **Rimote** scheme, and run. The
+agent appears in the menu bar (no Dock icon). On first launch, grant
+Accessibility (**System Settings → Privacy & Security → Accessibility**) so media
+keys work.
 
 Verify the agent is advertising on the network from another terminal:
 
 ```bash
 dns-sd -B _rimote._tcp
 ```
+
+---
+
+## Tests
+
+An end-to-end pairing test drives the **real agent binary** through the full
+[`PROTOCOL.md`](PROTOCOL.md) handshake over an actual WebSocket — pairing, token
+auth, live status push, a self-restoring command, and rejection of a bad token:
+
+```bash
+Tests/run-e2e.sh
+```
+
+It builds the app, launches it with an isolated, throwaway environment (so your
+real pairing state is never touched), and asserts the whole contract. See
+[`Tests/README.md`](Tests/README.md) for details.
 
 ---
 
