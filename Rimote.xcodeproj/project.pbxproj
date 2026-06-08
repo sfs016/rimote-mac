@@ -1,0 +1,403 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A1000101 /* RimoteApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000001 /* RimoteApp.swift */; };
+		A1000102 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000002 /* AppState.swift */; };
+		A1000103 /* MenuBarIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000003 /* MenuBarIcon.swift */; };
+		A1000104 /* MenuBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000004 /* MenuBarView.swift */; };
+		A1000105 /* RimoteServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000005 /* RimoteServer.swift */; };
+		A1000106 /* ClientConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000006 /* ClientConnection.swift */; };
+		A1000107 /* RemoteAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000007 /* RemoteAction.swift */; };
+		A1000108 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000008 /* Messages.swift */; };
+		A1000109 /* CommandRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000009 /* CommandRunner.swift */; };
+		A100010A /* MediaKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000A /* MediaKey.swift */; };
+		A100010B /* SystemState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000B /* SystemState.swift */; };
+		A100010C /* Shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000C /* Shell.swift */; };
+		A100010D /* PairingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000D /* PairingManager.swift */; };
+		A100010E /* TokenStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000E /* TokenStore.swift */; };
+		A100010F /* LaunchAtLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000F /* LaunchAtLogin.swift */; };
+		A1000110 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1000010 /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A1000001 /* RimoteApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RimoteApp.swift; sourceTree = "<group>"; };
+		A1000002 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		A1000003 /* MenuBarIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarIcon.swift; sourceTree = "<group>"; };
+		A1000004 /* MenuBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarView.swift; sourceTree = "<group>"; };
+		A1000005 /* RimoteServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RimoteServer.swift; sourceTree = "<group>"; };
+		A1000006 /* ClientConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientConnection.swift; sourceTree = "<group>"; };
+		A1000007 /* RemoteAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteAction.swift; sourceTree = "<group>"; };
+		A1000008 /* Messages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
+		A1000009 /* CommandRunner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandRunner.swift; sourceTree = "<group>"; };
+		A100000A /* MediaKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaKey.swift; sourceTree = "<group>"; };
+		A100000B /* SystemState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemState.swift; sourceTree = "<group>"; };
+		A100000C /* Shell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shell.swift; sourceTree = "<group>"; };
+		A100000D /* PairingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairingManager.swift; sourceTree = "<group>"; };
+		A100000E /* TokenStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenStore.swift; sourceTree = "<group>"; };
+		A100000F /* LaunchAtLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchAtLogin.swift; sourceTree = "<group>"; };
+		A1000010 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A1000011 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A1000012 /* Rimote.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Rimote.entitlements; sourceTree = "<group>"; };
+		A1000020 /* Rimote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rimote.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A1000200 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A1000300 = {
+			isa = PBXGroup;
+			children = (
+				A1000301 /* Rimote */,
+				A1000302 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A1000301 /* Rimote */ = {
+			isa = PBXGroup;
+			children = (
+				A1000310 /* App */,
+				A1000311 /* MenuBar */,
+				A1000312 /* Networking */,
+				A1000313 /* Protocol */,
+				A1000314 /* Commands */,
+				A1000315 /* Pairing */,
+				A1000316 /* System */,
+				A1000317 /* Resources */,
+			);
+			path = Rimote;
+			sourceTree = "<group>";
+		};
+		A1000302 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A1000020 /* Rimote.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A1000310 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				A1000001 /* RimoteApp.swift */,
+				A1000002 /* AppState.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		A1000311 /* MenuBar */ = {
+			isa = PBXGroup;
+			children = (
+				A1000003 /* MenuBarIcon.swift */,
+				A1000004 /* MenuBarView.swift */,
+			);
+			path = MenuBar;
+			sourceTree = "<group>";
+		};
+		A1000312 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				A1000005 /* RimoteServer.swift */,
+				A1000006 /* ClientConnection.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		A1000313 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				A1000007 /* RemoteAction.swift */,
+				A1000008 /* Messages.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		A1000314 /* Commands */ = {
+			isa = PBXGroup;
+			children = (
+				A1000009 /* CommandRunner.swift */,
+				A100000A /* MediaKey.swift */,
+				A100000B /* SystemState.swift */,
+				A100000C /* Shell.swift */,
+			);
+			path = Commands;
+			sourceTree = "<group>";
+		};
+		A1000315 /* Pairing */ = {
+			isa = PBXGroup;
+			children = (
+				A100000D /* PairingManager.swift */,
+				A100000E /* TokenStore.swift */,
+			);
+			path = Pairing;
+			sourceTree = "<group>";
+		};
+		A1000316 /* System */ = {
+			isa = PBXGroup;
+			children = (
+				A100000F /* LaunchAtLogin.swift */,
+			);
+			path = System;
+			sourceTree = "<group>";
+		};
+		A1000317 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A1000010 /* Assets.xcassets */,
+				A1000011 /* Info.plist */,
+				A1000012 /* Rimote.entitlements */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A1000400 /* Rimote */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A1000500 /* Build configuration list for PBXNativeTarget "Rimote" */;
+			buildPhases = (
+				A1000401 /* Sources */,
+				A1000200 /* Frameworks */,
+				A1000402 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Rimote;
+			productName = Rimote;
+			productReference = A1000020 /* Rimote.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A1000600 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1540;
+				LastUpgradeCheck = 1540;
+				TargetAttributes = {
+					A1000400 = {
+						CreatedOnToolsVersion = 15.4;
+					};
+				};
+			};
+			buildConfigurationList = A1000601 /* Build configuration list for PBXProject "Rimote" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A1000300;
+			productRefGroup = A1000302 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A1000400 /* Rimote */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A1000402 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1000110 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A1000401 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1000101 /* RimoteApp.swift in Sources */,
+				A1000102 /* AppState.swift in Sources */,
+				A1000103 /* MenuBarIcon.swift in Sources */,
+				A1000104 /* MenuBarView.swift in Sources */,
+				A1000105 /* RimoteServer.swift in Sources */,
+				A1000106 /* ClientConnection.swift in Sources */,
+				A1000107 /* RemoteAction.swift in Sources */,
+				A1000108 /* Messages.swift in Sources */,
+				A1000109 /* CommandRunner.swift in Sources */,
+				A100010A /* MediaKey.swift in Sources */,
+				A100010B /* SystemState.swift in Sources */,
+				A100010C /* Shell.swift in Sources */,
+				A100010D /* PairingManager.swift in Sources */,
+				A100010E /* TokenStore.swift in Sources */,
+				A100010F /* LaunchAtLogin.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		A1000700 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A1000701 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		A1000702 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Rimote/Resources/Rimote.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Rimote/Resources/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = app.rimote.mac;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				SWIFT_STRICT_CONCURRENCY = complete;
+			};
+			name = Debug;
+		};
+		A1000703 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Rimote/Resources/Rimote.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Rimote/Resources/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = app.rimote.mac;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				SWIFT_STRICT_CONCURRENCY = complete;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A1000601 /* Build configuration list for PBXProject "Rimote" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A1000700 /* Debug */,
+				A1000701 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A1000500 /* Build configuration list for PBXNativeTarget "Rimote" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A1000702 /* Debug */,
+				A1000703 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A1000600 /* Project object */;
+}
