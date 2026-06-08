@@ -165,8 +165,9 @@ final class ClientConnection {
     /// an `unauthorized` ack and closes the connection.
     private func ensureAuthenticated(token: String?, action: String) -> Bool {
         guard authority.isTokenValid(token) else {
-            send(WireMessage.ack(action: action, ok: false, message: "unauthorized"))
-            cancel()
+            // Close only after the rejection is flushed, so the client actually
+            // receives the reason rather than just seeing a dropped socket.
+            send(WireMessage.ack(action: action, ok: false, message: "unauthorized"), thenClose: true)
             return false
         }
         if !isAuthenticated {
@@ -202,11 +203,13 @@ final class ClientConnection {
 
     // MARK: - Send
 
-    private func send(_ data: Data) {
+    private func send(_ data: Data, thenClose: Bool = false) {
         let metadata = NWProtocolWebSocket.Metadata(opcode: .text)
         let context = NWConnection.ContentContext(identifier: "text", metadata: [metadata])
         connection.send(content: data, contentContext: context, isComplete: true,
-                        completion: .contentProcessed { _ in })
+                        completion: .contentProcessed { [weak self] _ in
+                            if thenClose { self?.connection.cancel() }
+                        })
     }
 
     // MARK: - Lifecycle
