@@ -92,8 +92,8 @@ shell. Unknown action → `{"status":"error","action":...,"message":"unknown act
 | `play_pause`      | system media key (code 16)                              |
 | `next_track`      | system media key (code 17)                              |
 | `previous_track`  | system media key (code 18)                              |
-| `skip_forward_10` | best-effort: native media key; Chrome → `L` key         |
-| `skip_back_10`    | best-effort: native media key; Chrome → `J` key         |
+| `brightness_up`   | display brightness up (HID key) — blind, no level reported |
+| `brightness_down` | display brightness down (HID key) — blind, no level reported |
 | `restart`         | AppleScript restart (destructive — confirmed in UI)     |
 | `shutdown`        | AppleScript shut down (destructive — confirmed in UI)   |
 | `status`          | a read, not a command — Mac replies with a status push  |

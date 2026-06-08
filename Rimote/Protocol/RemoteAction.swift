@@ -18,8 +18,8 @@ enum RemoteAction: String, CaseIterable {
     case playPause = "play_pause"
     case nextTrack = "next_track"
     case previousTrack = "previous_track"
-    case skipForward10 = "skip_forward_10"
-    case skipBack10 = "skip_back_10"
+    case brightnessUp = "brightness_up"
+    case brightnessDown = "brightness_down"
     case restart
     case shutdown
 

@@ -51,16 +51,15 @@ enum CommandRunner {
             MediaKey.send(.previous)
             return Outcome(ok: true, message: "previous track")
 
-        case .skipForward10:
-            // Best-effort (PRD §7): no universal macOS key exists. The native
-            // "next" media key advances podcasts/Apple TV; browser-specific keys
-            // are out of scope for the agent and handled client-side if at all.
-            MediaKey.send(.next)
-            return Outcome(ok: true, message: "skip forward (best-effort)")
+        case .brightnessUp:
+            // HID brightness keys drive the panel directly. The current level
+            // can't be read back reliably, so this is a blind ± like a TV remote.
+            MediaKey.send(.brightnessUp)
+            return Outcome(ok: true, message: "brightness up")
 
-        case .skipBack10:
-            MediaKey.send(.previous)
-            return Outcome(ok: true, message: "skip back (best-effort)")
+        case .brightnessDown:
+            MediaKey.send(.brightnessDown)
+            return Outcome(ok: true, message: "brightness down")
 
         case .restart:
             // The destructive-action confirmation lives in the iOS UI (PRD §7);

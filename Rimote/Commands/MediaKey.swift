@@ -14,6 +14,8 @@ enum MediaKey {
         case playPause = 16
         case next = 17
         case previous = 18
+        case brightnessUp = 2
+        case brightnessDown = 3
     }
 
     /// Sends a key as a down/up pair, the way a physical key press registers.
