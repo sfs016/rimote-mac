@@ -45,7 +45,7 @@ sleep, lock, volume, mute, and media transport — with sub-second latency and
 | Volume Up / Down | Adjusts output volume by ±10 |
 | Play / Pause | System media key — works across apps |
 | Next / Previous Track | System media keys |
-| Skip Forward / Back 10s | Best-effort (native media key; see limitations) |
+| Brightness Up / Down | Display brightness via HID keys (a blind ± — level isn't read) |
 | Restart / Shut Down | AppleScript power control (confirmed in the iPhone UI) |
 | Status | Reads volume / mute / battery (a read, not a command) |
 
@@ -152,9 +152,9 @@ Device") deletes that token immediately.
   Rimote can't either. It is never promised.
 - **Enterprise / university Wi-Fi** often blocks Bonjour (mDNS); discovery may
   fail on those networks (~10% of setups).
-- **10-second skip in browsers is best-effort.** There is no universal macOS key
-  for "skip 10s"; native players respond to the media key, but Chrome-based
-  players (YouTube, Netflix) are handled best-effort and may not respond.
+- **Brightness is a blind ±.** macOS doesn't report the current brightness back
+  reliably, so the brightness buttons nudge up/down like a TV remote — there's no
+  on-screen level.
 
 ---
 
