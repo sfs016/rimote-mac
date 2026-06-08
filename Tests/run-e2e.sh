@@ -16,7 +16,9 @@ REPO="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$REPO"
 
 TEST_PIN="1357"
-PORT="8765"
+# Listen on a non-standard port so the test never collides with a real agent
+# already holding 8765 (override with RIMOTE_TEST_PORT).
+PORT="${RIMOTE_TEST_PORT:-8766}"
 DERIVED="$REPO/DerivedData"            # gitignored
 TEST_HOME="$(mktemp -d)"               # isolates Application Support + login item
 AGENT_PID=""
@@ -36,7 +38,7 @@ APP="$DERIVED/Build/Products/Debug/Rimote.app/Contents/MacOS/Rimote"
 [ -x "$APP" ] || { echo "build did not produce $APP"; exit 1; }
 
 echo "==> Launching agent (isolated home: $TEST_HOME)"
-env RIMOTE_TEST_MODE=1 RIMOTE_TEST_PIN="$TEST_PIN" \
+env RIMOTE_TEST_MODE=1 RIMOTE_TEST_PIN="$TEST_PIN" RIMOTE_TEST_PORT="$PORT" \
     HOME="$TEST_HOME" CFFIXED_USER_HOME="$TEST_HOME" \
     "$APP" >/dev/null 2>&1 &
 AGENT_PID=$!

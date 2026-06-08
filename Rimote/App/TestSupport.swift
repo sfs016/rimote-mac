@@ -24,4 +24,13 @@ enum TestSupport {
     static var isActive: Bool {
         ProcessInfo.processInfo.environment["RIMOTE_TEST_MODE"] == "1"
     }
+
+    /// When `RIMOTE_TEST_PORT` holds a valid port number, the server listens there
+    /// instead of the default 8765 — lets the e2e test run even when another agent
+    /// already holds the standard port.
+    static var overridePort: UInt16? {
+        guard let value = ProcessInfo.processInfo.environment["RIMOTE_TEST_PORT"]
+        else { return nil }
+        return UInt16(value)
+    }
 }

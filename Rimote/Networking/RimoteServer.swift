@@ -53,8 +53,9 @@ final class RimoteServer {
         websocket.autoReplyPing = true
         parameters.defaultProtocolStack.applicationProtocols.insert(websocket, at: 0)
 
+        let port = TestSupport.overridePort.flatMap { NWEndpoint.Port(rawValue: $0) } ?? Self.port
         do {
-            let listener = try NWListener(using: parameters, on: Self.port)
+            let listener = try NWListener(using: parameters, on: port)
             listener.service = NWListener.Service(name: authority.deviceName, type: Self.serviceType)
 
             listener.stateUpdateHandler = { [weak self] state in
