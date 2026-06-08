@@ -25,7 +25,7 @@ final class PairingManager {
     /// Begins a pairing attempt: generates a fresh PIN and starts its expiry
     /// timer. Returns the PIN so the caller can display it.
     func beginPairing() -> String {
-        let pin = Self.randomPIN()
+        let pin = TestSupport.fixedPIN ?? Self.randomPIN()
         activePIN = pin
         expiry = Date().addingTimeInterval(Self.ttl)
         scheduleExpiry()

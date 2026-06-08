@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		A1000101 /* RimoteApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000001 /* RimoteApp.swift */; };
 		A1000102 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000002 /* AppState.swift */; };
+		A10001AA /* TestSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000AA /* TestSupport.swift */; };
 		A1000103 /* MenuBarIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000003 /* MenuBarIcon.swift */; };
 		A1000104 /* MenuBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000004 /* MenuBarView.swift */; };
 		A1000105 /* RimoteServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000005 /* RimoteServer.swift */; };
@@ -28,6 +29,7 @@
 /* Begin PBXFileReference section */
 		A1000001 /* RimoteApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RimoteApp.swift; sourceTree = "<group>"; };
 		A1000002 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		A10000AA /* TestSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSupport.swift; sourceTree = "<group>"; };
 		A1000003 /* MenuBarIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarIcon.swift; sourceTree = "<group>"; };
 		A1000004 /* MenuBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarView.swift; sourceTree = "<group>"; };
 		A1000005 /* RimoteServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RimoteServer.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 			children = (
 				A1000001 /* RimoteApp.swift */,
 				A1000002 /* AppState.swift */,
+				A10000AA /* TestSupport.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -234,6 +237,7 @@
 			files = (
 				A1000101 /* RimoteApp.swift in Sources */,
 				A1000102 /* AppState.swift in Sources */,
+				A10001AA /* TestSupport.swift in Sources */,
 				A1000103 /* MenuBarIcon.swift in Sources */,
 				A1000104 /* MenuBarView.swift in Sources */,
 				A1000105 /* RimoteServer.swift in Sources */,

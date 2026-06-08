@@ -31,7 +31,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     let state = AppState()
 
     func applicationDidFinishLaunching(_ notification: Notification) {
-        LaunchAtLogin.enableOnFirstLaunch()
+        // Skip the login-item registration under the e2e test so it never mutates
+        // the host machine; the server still starts so the test can pair.
+        if !TestSupport.isActive {
+            LaunchAtLogin.enableOnFirstLaunch()
+        }
         state.start()
     }
 }
