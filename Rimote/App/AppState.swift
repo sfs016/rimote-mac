@@ -24,6 +24,7 @@ final class AppState: ObservableObject {
     @Published private(set) var activePIN: String?
     @Published private(set) var isPaired: Bool
     @Published var launchAtLogin: Bool
+    @Published private(set) var accessibilityTrusted: Bool = Permissions.isAccessibilityTrusted
 
     private let tokenStore = TokenStore()
     private let pairing = PairingManager()
@@ -57,6 +58,11 @@ final class AppState: ObservableObject {
         tokenStore.forget()
         pairing.clear()
         isPaired = false
+    }
+
+    /// Re-read the Accessibility grant (it can change outside the app, in Settings).
+    func refreshPermissions() {
+        accessibilityTrusted = Permissions.isAccessibilityTrusted
     }
 
     // MARK: - Status mapping

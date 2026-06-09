@@ -24,6 +24,8 @@
 		A100010D /* PairingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000D /* PairingManager.swift */; };
 		A100010E /* TokenStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000E /* TokenStore.swift */; };
 		A100010F /* LaunchAtLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000F /* LaunchAtLogin.swift */; };
+		A10001CC /* ScreenLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000CC /* ScreenLock.swift */; };
+		A10001DD /* Permissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000DD /* Permissions.swift */; };
 		A1000110 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1000010 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +47,8 @@
 		A100000D /* PairingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairingManager.swift; sourceTree = "<group>"; };
 		A100000E /* TokenStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenStore.swift; sourceTree = "<group>"; };
 		A100000F /* LaunchAtLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchAtLogin.swift; sourceTree = "<group>"; };
+		A10000CC /* ScreenLock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenLock.swift; sourceTree = "<group>"; };
+		A10000DD /* Permissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permissions.swift; sourceTree = "<group>"; };
 		A1000010 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A1000011 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A1000012 /* Rimote.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Rimote.entitlements; sourceTree = "<group>"; };
@@ -155,6 +159,8 @@
 			isa = PBXGroup;
 			children = (
 				A100000F /* LaunchAtLogin.swift */,
+				A10000CC /* ScreenLock.swift */,
+				A10000DD /* Permissions.swift */,
 			);
 			path = System;
 			sourceTree = "<group>";
@@ -255,6 +261,8 @@
 				A100010D /* PairingManager.swift in Sources */,
 				A100010E /* TokenStore.swift in Sources */,
 				A100010F /* LaunchAtLogin.swift in Sources */,
+				A10001CC /* ScreenLock.swift in Sources */,
+				A10001DD /* Permissions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

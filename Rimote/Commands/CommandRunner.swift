@@ -18,11 +18,11 @@ enum CommandRunner {
             return runProcess("/usr/bin/pmset", ["sleepnow"], success: "sleeping")
 
         case .lock:
-            // Ctrl+Cmd+Q is the standard lock-screen shortcut.
-            return runAppleScript(
-                #"tell application "System Events" to keystroke "q" using {control down, command down}"#,
-                success: "locked"
-            )
+            // Locks immediately with no permission required (vs. a System Events
+            // keystroke, which would need Accessibility/Automation).
+            return ScreenLock.lock()
+                ? Outcome(ok: true, message: "locked")
+                : Outcome(ok: false, message: "lock failed")
 
         case .mute:
             return toggleMute()

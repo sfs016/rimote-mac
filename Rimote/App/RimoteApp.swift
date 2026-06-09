@@ -37,6 +37,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         // the host machine; the server still starts so the test can pair.
         if !TestSupport.isActive {
             LaunchAtLogin.enableOnFirstLaunch()
+            // Media/brightness keys need Accessibility — prompt up front so the
+            // user can grant it before reaching for those controls.
+            if !Permissions.isAccessibilityTrusted {
+                Permissions.requestAccessibility()
+            }
         }
         statusItem = StatusItemController(state: state)
         state.start()

@@ -13,6 +13,11 @@ struct MenuBarView: View {
         VStack(alignment: .leading, spacing: 12) {
             statusRow
 
+            if !state.accessibilityTrusted {
+                Divider()
+                accessibilityRow
+            }
+
             if let pin = state.activePIN {
                 Divider()
                 pinRow(pin)
@@ -48,6 +53,24 @@ struct MenuBarView: View {
                 .font(.system(size: 12, weight: .medium))
                 .lineLimit(2)
                 .fixedSize(horizontal: false, vertical: true)
+        }
+    }
+
+    private var accessibilityRow: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Label("Action needed", systemImage: "exclamationmark.triangle.fill")
+                .font(.system(size: 12, weight: .semibold))
+                .foregroundStyle(.orange)
+            Text("Allow Accessibility so the media and brightness buttons work.")
+                .font(.system(size: 11))
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+            Button("Open Accessibility Settings…") {
+                Permissions.requestAccessibility()
+                Permissions.openAccessibilitySettings()
+            }
+            .font(.system(size: 11, weight: .medium))
+            .padding(.top, 2)
         }
     }
 
