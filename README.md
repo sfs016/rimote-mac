@@ -62,7 +62,9 @@ sleep, lock, volume, mute, and media transport — with sub-second latency and
 ## Install (via the `.dmg`)
 
 > A signed + notarized `.dmg` will be attached to each
-> [GitHub release](../../releases). Until then, build from source below.
+> [GitHub release](../../releases). Until then, build one yourself with
+> `Scripts/build-dmg.sh` (produces `dist/Rimote.dmg`, ad-hoc signed — on first
+> launch, **right-click → Open** to get past Gatekeeper), or build from source below.
 
 1. Download `Rimote.dmg` from the latest release.
 2. Open it and drag **Rimote** to your Applications folder.
