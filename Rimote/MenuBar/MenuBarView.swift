@@ -61,7 +61,7 @@ struct MenuBarView: View {
             Label("Action needed", systemImage: "exclamationmark.triangle.fill")
                 .font(.system(size: 12, weight: .semibold))
                 .foregroundStyle(.orange)
-            Text("Allow Accessibility so the media and brightness buttons work.")
+            Text("Allow Accessibility so the media, brightness, and navigation buttons work.")
                 .font(.system(size: 11))
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)

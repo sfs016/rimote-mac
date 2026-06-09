@@ -46,6 +46,7 @@ sleep, lock, volume, mute, and media transport — with sub-second latency and
 | Play / Pause | System media key — works across apps |
 | Next / Previous Track | System media keys |
 | Brightness Up / Down | Display brightness via HID keys (a blind ± — level isn't read) |
+| Arrows / Select | Up / Down / Left / Right + Return keys (directional pad) |
 | Restart / Shut Down | AppleScript power control (confirmed in the iPhone UI) |
 | Status | Reads volume / mute / battery (a read, not a command) |
 
@@ -72,8 +73,8 @@ sleep, lock, volume, mute, and media transport — with sub-second latency and
    Dock.
 4. On first launch, Rimote asks for **Accessibility**
    (**System Settings → Privacy & Security → Accessibility**). Grant it so the
-   **media (Play/Pause, track) and brightness** controls work. Sleep, lock, mute,
-   and volume work without it. The menu-bar popover shows a reminder until it's
+   **media (Play/Pause, track), brightness, and navigation (arrows / Select)**
+   controls work. Sleep, lock, mute, and volume work without it. The menu-bar popover shows a reminder until it's
    granted. (Restart / Shut Down also prompt for Automation the first time.)
 5. Open the Rimote app on your iPhone, pick your Mac, and enter the PIN shown in
    the menu-bar popover.
