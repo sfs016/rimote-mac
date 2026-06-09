@@ -94,6 +94,11 @@ shell. Unknown action → `{"status":"error","action":...,"message":"unknown act
 | `previous_track`  | system media key (code 18)                              |
 | `brightness_up`   | display brightness up (HID key) — blind, no level reported |
 | `brightness_down` | display brightness down (HID key) — blind, no level reported |
+| `arrow_up`        | Up Arrow key                                            |
+| `arrow_down`      | Down Arrow key                                          |
+| `arrow_left`      | Left Arrow key                                          |
+| `arrow_right`     | Right Arrow key                                         |
+| `select`          | Return / Enter key                                      |
 | `restart`         | AppleScript restart (destructive — confirmed in UI)     |
 | `shutdown`        | AppleScript shut down (destructive — confirmed in UI)   |
 | `status`          | a read, not a command — Mac replies with a status push  |

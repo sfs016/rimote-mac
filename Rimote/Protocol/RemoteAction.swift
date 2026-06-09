@@ -20,6 +20,11 @@ enum RemoteAction: String, CaseIterable {
     case previousTrack = "previous_track"
     case brightnessUp = "brightness_up"
     case brightnessDown = "brightness_down"
+    case arrowUp = "arrow_up"
+    case arrowDown = "arrow_down"
+    case arrowLeft = "arrow_left"
+    case arrowRight = "arrow_right"
+    case select
     case restart
     case shutdown
 

@@ -61,6 +61,26 @@ enum CommandRunner {
             MediaKey.send(.brightnessDown)
             return Outcome(ok: true, message: "brightness down")
 
+        case .arrowUp:
+            Keyboard.press(.up)
+            return Outcome(ok: true, message: "up")
+
+        case .arrowDown:
+            Keyboard.press(.down)
+            return Outcome(ok: true, message: "down")
+
+        case .arrowLeft:
+            Keyboard.press(.left)
+            return Outcome(ok: true, message: "left")
+
+        case .arrowRight:
+            Keyboard.press(.right)
+            return Outcome(ok: true, message: "right")
+
+        case .select:
+            Keyboard.press(.return)
+            return Outcome(ok: true, message: "select")
+
         case .restart:
             // The destructive-action confirmation lives in the iOS UI (PRD §7);
             // the agent simply performs the request it receives.

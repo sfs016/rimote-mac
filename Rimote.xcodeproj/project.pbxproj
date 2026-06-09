@@ -19,6 +19,7 @@
 		A1000108 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000008 /* Messages.swift */; };
 		A1000109 /* CommandRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000009 /* CommandRunner.swift */; };
 		A100010A /* MediaKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000A /* MediaKey.swift */; };
+		A10001EE /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000EE /* Keyboard.swift */; };
 		A100010B /* SystemState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000B /* SystemState.swift */; };
 		A100010C /* Shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000C /* Shell.swift */; };
 		A100010D /* PairingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000D /* PairingManager.swift */; };
@@ -42,6 +43,7 @@
 		A1000008 /* Messages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
 		A1000009 /* CommandRunner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandRunner.swift; sourceTree = "<group>"; };
 		A100000A /* MediaKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaKey.swift; sourceTree = "<group>"; };
+		A10000EE /* Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
 		A100000B /* SystemState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemState.swift; sourceTree = "<group>"; };
 		A100000C /* Shell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shell.swift; sourceTree = "<group>"; };
 		A100000D /* PairingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairingManager.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 			children = (
 				A1000009 /* CommandRunner.swift */,
 				A100000A /* MediaKey.swift */,
+				A10000EE /* Keyboard.swift */,
 				A100000B /* SystemState.swift */,
 				A100000C /* Shell.swift */,
 			);
@@ -256,6 +259,7 @@
 				A1000108 /* Messages.swift in Sources */,
 				A1000109 /* CommandRunner.swift in Sources */,
 				A100010A /* MediaKey.swift in Sources */,
+				A10001EE /* Keyboard.swift in Sources */,
 				A100010B /* SystemState.swift in Sources */,
 				A100010C /* Shell.swift in Sources */,
 				A100010D /* PairingManager.swift in Sources */,
