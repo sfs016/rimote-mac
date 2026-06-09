@@ -70,9 +70,11 @@ sleep, lock, volume, mute, and media transport — with sub-second latency and
 2. Open it and drag **Rimote** to your Applications folder.
 3. Launch Rimote. It lives in the menu bar — look for the circle icon, not the
    Dock.
-4. On first launch, macOS may ask permission to post media keys
-   (**System Settings → Privacy & Security → Accessibility**). Grant it so
-   Play/Pause and track controls work.
+4. On first launch, Rimote asks for **Accessibility**
+   (**System Settings → Privacy & Security → Accessibility**). Grant it so the
+   **media (Play/Pause, track) and brightness** controls work. Sleep, lock, mute,
+   and volume work without it. The menu-bar popover shows a reminder until it's
+   granted. (Restart / Shut Down also prompt for Automation the first time.)
 5. Open the Rimote app on your iPhone, pick your Mac, and enter the PIN shown in
    the menu-bar popover.
 
