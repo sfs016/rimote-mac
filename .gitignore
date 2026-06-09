@@ -26,3 +26,6 @@ xcuserdata/
 *.mobileprovision
 *.cer
 ExportOptions.plist
+
+# Packaged downloads
+dist/
