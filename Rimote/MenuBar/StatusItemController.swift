@@ -14,13 +14,17 @@ final class StatusItemController: NSObject {
     private let statusItem: NSStatusItem
     private let popover = NSPopover()
     private var cancellables = Set<AnyCancellable>()
+    private var outsideClickMonitor: Any?
 
     init(state: AppState) {
         self.state = state
         self.statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
         super.init()
 
-        popover.behavior = .transient
+        // We control closing ourselves (see `showPopover`): the popover stays open
+        // regardless of mouse movement / hover and closes only on a click outside.
+        popover.behavior = .applicationDefined
+        popover.animates = true
         popover.contentViewController = NSHostingController(rootView: MenuBarView(state: state))
 
         if let button = statusItem.button {
@@ -45,13 +49,32 @@ final class StatusItemController: NSObject {
     }
 
     @objc private func togglePopover() {
-        popover.isShown ? popover.performClose(nil) : showPopover()
+        popover.isShown ? closePopover() : showPopover()
     }
 
     private func showPopover() {
         guard let button = statusItem.button, !popover.isShown else { return }
+        state.refreshPermissions()
         NSApp.activate(ignoringOtherApps: true)
         popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
+        button.highlight(true)
+
+        // Close when the user clicks anywhere outside the popover (clicks inside
+        // are local events and don't trigger this global monitor).
+        outsideClickMonitor = NSEvent.addGlobalMonitorForEvents(
+            matching: [.leftMouseDown, .rightMouseDown]
+        ) { [weak self] _ in
+            self?.closePopover()
+        }
+    }
+
+    private func closePopover() {
+        popover.performClose(nil)
+        statusItem.button?.highlight(false)
+        if let monitor = outsideClickMonitor {
+            NSEvent.removeMonitor(monitor)
+            outsideClickMonitor = nil
+        }
     }
 
     private func updateIcon(_ iconState: AppState.IconState) {
