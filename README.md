@@ -3,7 +3,8 @@
 Turn your iPhone into a dead-simple, LAN-only remote for your Mac. **Rimote** is
 the macOS menu-bar companion that listens for commands from the
 [Rimote iPhone app](https://rimote.app) over your local network and runs them —
-sleep, lock, volume, mute, and media transport — with sub-second latency and
+sleep, lock, volume, mute, media transport, brightness, and a directional pad
+(arrow keys + Enter) — with sub-second latency and
 **nothing ever leaving your Wi-Fi**.
 
 > No cloud. No account. No relay server. No data collection. The phone talks to
@@ -40,7 +41,7 @@ sleep, lock, volume, mute, and media transport — with sub-second latency and
 | Command | Effect |
 |---|---|
 | Sleep | Sleeps the Mac (`pmset sleepnow`) |
-| Lock | Locks the screen (⌃⌘Q) |
+| Lock | Locks the screen instantly (no permission needed) |
 | Mute | Toggles output mute; reports the new state |
 | Volume Up / Down | Adjusts output volume by ±10 |
 | Play / Pause | System media key — works across apps |
@@ -123,7 +124,7 @@ real pairing state is never touched), and asserts the whole contract. See
 ```
 iPhone (SwiftUI)  ──WebSocket :8765──▶  Rimote Mac agent  ──▶  macOS
   URLSessionWS         ws://mac.local        NWListener          osascript /
-  Bonjour browse       JSON frames           command whitelist   pmset / media keys
+  Bonjour browse       JSON frames           command whitelist   pmset / CGEvent keys
 ```
 
 The wire contract is frozen in [`PROTOCOL.md`](PROTOCOL.md): WebSocket transport,
@@ -136,6 +137,30 @@ into small, single-responsibility pieces:
   verified, stored `0600` in Application Support).
 - `Commands/` — the fixed command implementations and the system-state reader.
 - `MenuBar/` — the SwiftUI menu-bar icon and popover.
+
+---
+
+## Releasing (signing & notarization)
+
+`Scripts/build-dmg.sh` produces an **ad-hoc-signed** `dist/Rimote.dmg` — great for
+local use, but a downloaded copy needs a one-time **right-click → Open** to get
+past Gatekeeper. For a frictionless public release, sign with a **Developer ID
+Application** certificate and notarize (requires an Apple Developer account):
+
+1. **Sign** with hardened runtime — replace the ad-hoc `codesign --sign -` in the
+   script with your identity:
+   ```bash
+   codesign --force --deep --options runtime \
+     --sign "Developer ID Application: Your Name (TEAMID)" Rimote.app
+   ```
+2. **Notarize** the disk image and staple the ticket:
+   ```bash
+   xcrun notarytool submit dist/Rimote.dmg --keychain-profile "AC_NOTARY" --wait
+   xcrun stapler staple dist/Rimote.dmg
+   ```
+3. Attach the stapled `.dmg` to a [GitHub release](../../releases).
+
+Once notarized, the app opens with a normal double-click — no right-click needed.
 
 ---
 
