@@ -85,7 +85,7 @@ sleep, lock, volume, mute, media transport, brightness, and a directional pad
 ## Build from source
 
 ```bash
-git clone https://github.com/farhajshahid/rimote-mac.git
+git clone https://github.com/sfs016/rimote-mac.git
 cd rimote-mac
 xcodebuild -project Rimote.xcodeproj -scheme Rimote -configuration Release build
 ```
