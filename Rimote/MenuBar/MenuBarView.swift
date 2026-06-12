@@ -65,6 +65,13 @@ struct MenuBarView: View {
                 .font(.system(size: 11))
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
+            // Stale-grant escape hatch: an entry left over from an older copy of
+            // the app shows as already ON in System Settings, yet this copy stays
+            // untrusted. Re-toggling (or remove + re-add) re-keys it.
+            Text("Already allowed? Turn Rimote off and on again in the list — macOS may be holding onto a previous copy's permission.")
+                .font(.system(size: 10))
+                .foregroundStyle(.tertiary)
+                .fixedSize(horizontal: false, vertical: true)
             Button("Open Accessibility Settings…") {
                 Permissions.requestAccessibility()
                 Permissions.openAccessibilitySettings()

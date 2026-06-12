@@ -36,14 +36,33 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         // Skip the login-item registration under the e2e test so it never mutates
         // the host machine; the server still starts so the test can pair.
         if !TestSupport.isActive {
+            // Before anything else: if we're running from the DMG or a
+            // translocated path, permissions won't stick — offer to move to
+            // /Applications and relaunch. Everything below assumes a stable home.
+            if Relocation.offerMoveIfNeeded() { return }
+
             LaunchAtLogin.enableOnFirstLaunch()
             // Media/brightness keys need Accessibility — prompt up front so the
             // user can grant it before reaching for those controls.
             if !Permissions.isAccessibilityTrusted {
                 Permissions.requestAccessibility()
             }
+            // Keep reacting if the grant is given (or revoked) while running.
+            state.startAccessibilityWatch()
         }
         statusItem = StatusItemController(state: state)
         state.start()
+
+        // First launch: open the popover unprompted. A menu-bar-only agent is
+        // invisible to someone who has never used one — this is the moment that
+        // teaches "Rimote lives up here". (Slight delay so the status item has
+        // settled into the bar before we anchor to it.)
+        if !TestSupport.isActive,
+           !UserDefaults.standard.bool(forKey: "didShowFirstLaunchPopover") {
+            UserDefaults.standard.set(true, forKey: "didShowFirstLaunchPopover")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { [weak self] in
+                self?.statusItem?.showPopover()
+            }
+        }
     }
 }

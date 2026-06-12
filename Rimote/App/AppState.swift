@@ -29,6 +29,7 @@ final class AppState: ObservableObject {
     private let tokenStore = TokenStore()
     private let pairing = PairingManager()
     private var server: RimoteServer?
+    private var accessibilityPoll: Task<Void, Never>?
 
     init() {
         isPaired = tokenStore.isPaired
@@ -62,7 +63,41 @@ final class AppState: ObservableObject {
 
     /// Re-read the Accessibility grant (it can change outside the app, in Settings).
     func refreshPermissions() {
-        accessibilityTrusted = Permissions.isAccessibilityTrusted
+        let trusted = Permissions.isAccessibilityTrusted
+        if trusted != accessibilityTrusted { accessibilityTrusted = trusted }
+    }
+
+    /// Watch for the Accessibility grant changing *while the app is running*.
+    ///
+    /// The grant lands in System Settings, not in the app — without this, the
+    /// "Action needed" banner stayed up (and the user stayed stuck) until a
+    /// relaunch. Two complementary signals:
+    ///   - the distributed `com.apple.accessibility.api` notification, posted by
+    ///     the system when any app's AX permission flips, and
+    ///   - a 1.5s poll as a fallback while untrusted (the notification is not a
+    ///     documented contract), slowing to ~10s once trusted.
+    func startAccessibilityWatch() {
+        DistributedNotificationCenter.default().addObserver(
+            forName: Notification.Name("com.apple.accessibility.api"),
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            Task { @MainActor in
+                self?.refreshPermissions()
+            }
+        }
+
+        accessibilityPoll?.cancel()
+        accessibilityPoll = Task { [weak self] in
+            while !Task.isCancelled {
+                try? await Task.sleep(nanoseconds: 1_500_000_000)
+                guard let self, !Task.isCancelled else { return }
+                self.refreshPermissions()
+                if self.accessibilityTrusted {
+                    try? await Task.sleep(nanoseconds: 8_500_000_000)
+                }
+            }
+        }
     }
 
     // MARK: - Status mapping

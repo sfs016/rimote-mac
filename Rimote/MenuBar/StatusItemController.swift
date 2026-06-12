@@ -46,13 +46,24 @@ final class StatusItemController: NSObject {
                 self?.showPopover()
             }
             .store(in: &cancellables)
+
+        // Auto-present when the Accessibility grant lands: granting happens over
+        // in System Settings, so without this the app gives zero feedback at the
+        // exact moment the user did what we asked of them.
+        state.$accessibilityTrusted
+            .removeDuplicates()
+            .dropFirst()
+            .filter { $0 }
+            .receive(on: RunLoop.main)
+            .sink { [weak self] _ in self?.showPopover() }
+            .store(in: &cancellables)
     }
 
     @objc private func togglePopover() {
         popover.isShown ? closePopover() : showPopover()
     }
 
-    private func showPopover() {
+    func showPopover() {
         guard let button = statusItem.button, !popover.isShown else { return }
         state.refreshPermissions()
         NSApp.activate(ignoringOtherApps: true)
