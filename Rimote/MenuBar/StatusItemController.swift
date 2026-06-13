@@ -66,6 +66,7 @@ final class StatusItemController: NSObject {
     func showPopover() {
         guard let button = statusItem.button, !popover.isShown else { return }
         state.refreshPermissions()
+        state.refreshLocalIP()
         NSApp.activate(ignoringOtherApps: true)
         popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
         button.highlight(true)

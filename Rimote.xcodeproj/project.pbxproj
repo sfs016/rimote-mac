@@ -28,6 +28,7 @@
 		A100010F /* LaunchAtLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000F /* LaunchAtLogin.swift */; };
 		A10001CC /* ScreenLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000CC /* ScreenLock.swift */; };
 		A10001DD /* Permissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000DD /* Permissions.swift */; };
+		A10001AC /* NetworkInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000AC /* NetworkInfo.swift */; };
 		A1000110 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1000010 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +54,7 @@
 		A100000F /* LaunchAtLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchAtLogin.swift; sourceTree = "<group>"; };
 		A10000CC /* ScreenLock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenLock.swift; sourceTree = "<group>"; };
 		A10000DD /* Permissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permissions.swift; sourceTree = "<group>"; };
+		A10000AC /* NetworkInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkInfo.swift; sourceTree = "<group>"; };
 		A1000010 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A1000011 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A1000012 /* Rimote.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Rimote.entitlements; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 				A100000F /* LaunchAtLogin.swift */,
 				A10000CC /* ScreenLock.swift */,
 				A10000DD /* Permissions.swift */,
+				A10000AC /* NetworkInfo.swift */,
 			);
 			path = System;
 			sourceTree = "<group>";
@@ -254,6 +257,7 @@
 				A1000102 /* AppState.swift in Sources */,
 				A10001AA /* TestSupport.swift in Sources */,
 				A10001AB /* Relocation.swift in Sources */,
+				A10001AC /* NetworkInfo.swift in Sources */,
 				A1000103 /* MenuBarIcon.swift in Sources */,
 				A1000104 /* MenuBarView.swift in Sources */,
 				A10001BB /* StatusItemController.swift in Sources */,

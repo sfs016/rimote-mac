@@ -45,14 +45,25 @@ struct MenuBarView: View {
     // MARK: - Rows
 
     private var statusRow: some View {
-        HStack(spacing: 8) {
-            Circle()
-                .fill(statusColor)
-                .frame(width: 8, height: 8)
-            Text(state.statusText)
-                .font(.system(size: 12, weight: .medium))
-                .lineLimit(2)
-                .fixedSize(horizontal: false, vertical: true)
+        VStack(alignment: .leading, spacing: 3) {
+            HStack(spacing: 8) {
+                Circle()
+                    .fill(statusColor)
+                    .frame(width: 8, height: 8)
+                Text(state.statusText)
+                    .font(.system(size: 12, weight: .medium))
+                    .lineLimit(2)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            // For "Connect by IP address" on the iPhone — the fallback when the
+            // network blocks Bonjour discovery (campus / office Wi-Fi).
+            if let ip = state.localIPAddress {
+                Text("IP address: \(ip)")
+                    .font(.system(size: 11, design: .monospaced))
+                    .foregroundStyle(.secondary)
+                    .textSelection(.enabled)
+                    .padding(.leading, 16)
+            }
         }
     }
 

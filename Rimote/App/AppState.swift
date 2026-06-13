@@ -25,6 +25,9 @@ final class AppState: ObservableObject {
     @Published private(set) var isPaired: Bool
     @Published var launchAtLogin: Bool
     @Published private(set) var accessibilityTrusted: Bool = Permissions.isAccessibilityTrusted
+    /// The Mac's LAN IPv4, shown in the popover so users on Bonjour-blocking
+    /// networks can pair by IP. Refreshed whenever the popover opens.
+    @Published private(set) var localIPAddress: String? = NetworkInfo.primaryIPv4()
 
     private let tokenStore = TokenStore()
     private let pairing = PairingManager()
@@ -65,6 +68,13 @@ final class AppState: ObservableObject {
     func refreshPermissions() {
         let trusted = Permissions.isAccessibilityTrusted
         if trusted != accessibilityTrusted { accessibilityTrusted = trusted }
+    }
+
+    /// Re-read the LAN IP (cheap; called when the popover opens, since the
+    /// network can change at any time — Wi-Fi hop, hotspot, cable).
+    func refreshLocalIP() {
+        let ip = NetworkInfo.primaryIPv4()
+        if ip != localIPAddress { localIPAddress = ip }
     }
 
     /// Watch for the Accessibility grant changing *while the app is running*.

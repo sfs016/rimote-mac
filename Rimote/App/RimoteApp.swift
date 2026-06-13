@@ -65,4 +65,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             }
         }
     }
+
+    /// Launching the app while it's already running (Finder, Launchpad, Dock,
+    /// Spotlight) lands here — open the popover. For a menu-bar-only agent this
+    /// is the user saying "show me the app"; doing nothing reads as broken.
+    func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows: Bool) -> Bool {
+        statusItem?.showPopover()
+        return false
+    }
 }
