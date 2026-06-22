@@ -25,6 +25,10 @@ xcuserdata/
 *.p12
 *.mobileprovision
 *.cer
+*.key
+*.csr
+*.pem
+signing/
 ExportOptions.plist
 
 # Packaged downloads

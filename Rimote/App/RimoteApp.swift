@@ -42,24 +42,21 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             if Relocation.offerMoveIfNeeded() { return }
 
             LaunchAtLogin.enableOnFirstLaunch()
-            // Media/brightness keys need Accessibility — prompt up front so the
-            // user can grant it before reaching for those controls.
-            if !Permissions.isAccessibilityTrusted {
-                Permissions.requestAccessibility()
-            }
             // Keep reacting if the grant is given (or revoked) while running.
             state.startAccessibilityWatch()
         }
         statusItem = StatusItemController(state: state)
         state.start()
 
-        // First launch: open the popover unprompted. A menu-bar-only agent is
-        // invisible to someone who has never used one — this is the moment that
-        // teaches "Rimote lives up here". (Slight delay so the status item has
-        // settled into the bar before we anchor to it.)
-        if !TestSupport.isActive,
-           !UserDefaults.standard.bool(forKey: "didShowFirstLaunchPopover") {
-            UserDefaults.standard.set(true, forKey: "didShowFirstLaunchPopover")
+        // Show our own popover on launch whenever the user still has something to
+        // do — grant Accessibility, or pair a phone. We deliberately do NOT fire
+        // the bare system Accessibility prompt here: that system dialog steals
+        // focus and trips the popover's outside-click monitor, so the agent's own
+        // UI appeared to "not open" right when the user needed it. Instead the
+        // popover shows the Action-needed state, and its button drives the system
+        // grant on the user's terms. Once fully set up (paired + trusted) we stay
+        // quiet so it isn't intrusive on every login.
+        if !TestSupport.isActive, !state.isPaired || !state.accessibilityTrusted {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { [weak self] in
                 self?.statusItem?.showPopover()
             }
