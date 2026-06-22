@@ -142,25 +142,40 @@ into small, single-responsibility pieces:
 
 ## Releasing (signing & notarization)
 
-`Scripts/build-dmg.sh` produces an **ad-hoc-signed** `dist/Rimote.dmg` — great for
-local use, but a downloaded copy needs a one-time **right-click → Open** to get
-past Gatekeeper. For a frictionless public release, sign with a **Developer ID
-Application** certificate and notarize (requires an Apple Developer account):
+`Scripts/build-dmg.sh` signs and notarizes automatically based on what's
+available — no edits required:
 
-1. **Sign** with hardened runtime — replace the ad-hoc `codesign --sign -` in the
-   script with your identity:
-   ```bash
-   codesign --force --deep --options runtime \
-     --sign "Developer ID Application: Your Name (TEAMID)" Rimote.app
-   ```
-2. **Notarize** the disk image and staple the ticket:
-   ```bash
-   xcrun notarytool submit dist/Rimote.dmg --keychain-profile "AC_NOTARY" --wait
-   xcrun stapler staple dist/Rimote.dmg
-   ```
-3. Attach the stapled `.dmg` to a [GitHub release](../../releases).
+- **Ad-hoc (default).** With no Developer ID identity in the keychain it
+  ad-hoc-signs. Fine for local use, but a downloaded copy needs a one-time
+  **right-click → Open** to get past Gatekeeper.
+- **Developer ID signed.** With a *Developer ID Application* identity in the
+  keychain, the app (and the `.dmg`) are signed with the hardened runtime and a
+  secure timestamp. Override the identity with `RIMOTE_SIGN_IDENTITY`.
+- **Notarized (frictionless public release).** Also set the three notary
+  variables and the script submits both the app and the `.dmg` to Apple's notary
+  service and staples the tickets, so a download opens with a normal
+  double-click — even offline:
 
-Once notarized, the app opens with a normal double-click — no right-click needed.
+  ```bash
+  export RIMOTE_NOTARY_KEY=~/.appstoreconnect/private_keys/AuthKey_XXXX.p8
+  export RIMOTE_NOTARY_KEY_ID=XXXX            # the API key's Key ID
+  export RIMOTE_NOTARY_ISSUER=<issuer-uuid>   # App Store Connect issuer
+  Scripts/build-dmg.sh
+  ```
+
+  The App Store Connect API key must have the **Admin** role; the same key used
+  for the iOS upload works. These are read from the environment only — never
+  commit them. Then attach the stapled `dist/Rimote.dmg` to a
+  [GitHub release](../../releases).
+
+**Creating the Developer ID certificate** (one-time): it can only be made by the
+team's **Account Holder**, not via an API key. Generate a CSR locally
+(`openssl req -new -newkey rsa:2048 -nodes -keyout devid.key -out devid.csr
+-subj "/CN=Rimote Developer ID/C=US"`), upload `devid.csr` at
+[developer.apple.com → Certificates → Developer ID Application](https://developer.apple.com/account/resources/certificates/add),
+download the `.cer`, then import the cert and key into the login keychain
+(`security import devid.cer -A` and `security import devid.key -A -T
+/usr/bin/codesign`).
 
 ---
 

@@ -5,9 +5,18 @@
 # side by side, a large icon size, hidden toolbar, and the app icon as the
 # volume icon.
 #
-# The app is ad-hoc signed (no Apple Developer account required). Because it
-# isn't notarized, the first launch needs a right-click → Open to get past
-# Gatekeeper; this is expected until the app is signed + notarized for release.
+# Signing & notarization (automatic when credentials are present):
+#   - If a "Developer ID Application" identity is in the keychain, the app and
+#     the .dmg are signed with the hardened runtime + a secure timestamp.
+#     Override the chosen identity with RIMOTE_SIGN_IDENTITY.
+#   - If the notary credentials below are also set, the .dmg is submitted to
+#     Apple's notary service and the ticket is stapled, so a downloaded copy
+#     opens with a normal double-click (no right-click → Open):
+#         RIMOTE_NOTARY_KEY     path to the App Store Connect API key (.p8)
+#         RIMOTE_NOTARY_KEY_ID  the key's Key ID
+#         RIMOTE_NOTARY_ISSUER  the issuer UUID
+#   - With neither, it falls back to an ad-hoc signature (local-use only; the
+#     first launch needs a right-click → Open to get past Gatekeeper).
 #
 # Usage:  Scripts/build-dmg.sh
 # Output: dist/Rimote.dmg
@@ -24,6 +33,14 @@ DIST="$REPO/dist"
 DMG_RW="$DIST/rw.dmg"
 DMG_OUT="$DIST/$APP_NAME.dmg"
 BG="$DIST/dmg-bg.png"
+ENTITLEMENTS="$REPO/Rimote/Resources/Rimote.entitlements"
+
+# Resolve a Developer ID Application identity (explicit override, else auto-detect).
+SIGN_ID="${RIMOTE_SIGN_IDENTITY:-}"
+if [ -z "$SIGN_ID" ]; then
+  SIGN_ID="$(security find-identity -v -p codesigning \
+    | grep -o '"Developer ID Application: [^"]*"' | head -1 | tr -d '"')" || true
+fi
 
 rm -rf "$DIST"
 mkdir -p "$DIST"
@@ -35,8 +52,44 @@ xcodebuild -project Rimote.xcodeproj -scheme "$APP_NAME" -configuration Release 
 APP="$DERIVED/Build/Products/Release/$APP_NAME.app"
 [ -d "$APP" ] || { echo "build did not produce $APP"; exit 1; }
 
-echo "==> Ad-hoc signing"
-codesign --force --deep --sign - "$APP"
+# Submit an artifact (app zip or dmg) to the notary service and wait. Stapling
+# is done separately because the ticket attaches to the .app / .dmg, never to
+# the upload zip (stapler can't write into a zip).
+notarize_submit() {
+  xcrun notarytool submit "$1" \
+    --key "$RIMOTE_NOTARY_KEY" \
+    --key-id "$RIMOTE_NOTARY_KEY_ID" \
+    --issuer "$RIMOTE_NOTARY_ISSUER" \
+    --wait
+}
+
+NOTARY_READY=""
+if [ -n "$SIGN_ID" ] && [ -n "${RIMOTE_NOTARY_KEY:-}" ] \
+   && [ -n "${RIMOTE_NOTARY_KEY_ID:-}" ] && [ -n "${RIMOTE_NOTARY_ISSUER:-}" ]; then
+  NOTARY_READY="yes"
+fi
+
+if [ -n "$SIGN_ID" ]; then
+  echo "==> Signing app with hardened runtime: $SIGN_ID"
+  codesign --force --options runtime --timestamp \
+    --entitlements "$ENTITLEMENTS" --sign "$SIGN_ID" "$APP"
+  codesign --verify --strict --verbose=1 "$APP"
+
+  # Notarize + staple the app itself so the very first launch is accepted even
+  # offline (the dmg gets its own ticket later). Zip is just the upload vehicle.
+  if [ -n "$NOTARY_READY" ]; then
+    echo "==> Notarizing the app (so it launches offline)…"
+    APP_ZIP="$DIST/app.zip"
+    ditto -c -k --keepParent "$APP" "$APP_ZIP"
+    notarize_submit "$APP_ZIP"       # registers the app's cdhash with Apple
+    rm -f "$APP_ZIP"
+    xcrun stapler staple "$APP"      # staple ticket onto the .app bundle
+    xcrun stapler validate "$APP"
+  fi
+else
+  echo "==> No Developer ID identity found — ad-hoc signing (local use only)"
+  codesign --force --deep --sign - "$APP"
+fi
 
 echo "==> Rendering background"
 swift "$REPO/Scripts/make-dmg-background.swift" "$BG" >/dev/null
@@ -93,6 +146,23 @@ echo "==> Finalizing"
 hdiutil detach "$DEV" >/dev/null 2>&1 || hdiutil detach "$MOUNT" >/dev/null 2>&1 || true
 hdiutil convert "$DMG_RW" -format UDZO -imagekey zlib-level=9 -ov -o "$DMG_OUT" >/dev/null
 rm -f "$DMG_RW" "$BG"
+
+# Sign the disk image itself (Developer ID) so its signature matches the app.
+if [ -n "$SIGN_ID" ]; then
+  echo "==> Signing the .dmg"
+  codesign --force --timestamp --sign "$SIGN_ID" "$DMG_OUT"
+fi
+
+# Notarize + staple the .dmg so opening the download is accepted offline too.
+if [ -n "$NOTARY_READY" ]; then
+  echo "==> Notarizing the .dmg…"
+  notarize_submit "$DMG_OUT"
+  xcrun stapler staple "$DMG_OUT"
+  xcrun stapler validate "$DMG_OUT"
+  spctl -a -t open --context context:primary-signature -v "$DMG_OUT" || true
+else
+  echo "==> Skipping notarization (set RIMOTE_NOTARY_KEY / _KEY_ID / _ISSUER to enable)"
+fi
 
 echo "==> Done: $DMG_OUT"
 ls -lh "$DMG_OUT"
