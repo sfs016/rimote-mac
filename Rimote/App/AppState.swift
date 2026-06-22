@@ -80,32 +80,47 @@ final class AppState: ObservableObject {
     /// Watch for the Accessibility grant changing *while the app is running*.
     ///
     /// The grant lands in System Settings, not in the app — without this, the
-    /// "Action needed" banner stayed up (and the user stayed stuck) until a
-    /// relaunch. Two complementary signals:
-    ///   - the distributed `com.apple.accessibility.api` notification, posted by
-    ///     the system when any app's AX permission flips, and
-    ///   - a 1.5s poll as a fallback while untrusted (the notification is not a
-    ///     documented contract), slowing to ~10s once trusted.
+    /// "Action needed" state stays up (and the user stays stuck) after they've
+    /// actually granted it. Two things conspired to make it lag the real state:
+    ///
+    ///  1. A menu-bar-only (`.accessory`) app has distributed notifications
+    ///     **suspended by default** — they're coalesced and delivered only when
+    ///     the app next becomes active. So `com.apple.accessibility.api` arrived
+    ///     late, making the warning look "stuck" until some later interaction.
+    ///     `.deliverImmediately` opts out so we hear the flip the moment it lands.
+    ///  2. `AXIsProcessTrusted()` updates a beat *after* the notification fires,
+    ///     so a single immediate read often still sees the old value. We re-read
+    ///     across a short settle window to catch the transition.
+    ///
+    /// A steady 2s poll backs both up (the notification isn't a documented
+    /// contract); one `AXIsProcessTrusted()` call every 2s is negligible.
     func startAccessibilityWatch() {
         DistributedNotificationCenter.default().addObserver(
-            forName: Notification.Name("com.apple.accessibility.api"),
+            self,
+            selector: #selector(accessibilityDidChange),
+            name: Notification.Name("com.apple.accessibility.api"),
             object: nil,
-            queue: .main
-        ) { [weak self] _ in
-            Task { @MainActor in
-                self?.refreshPermissions()
-            }
-        }
+            suspensionBehavior: .deliverImmediately
+        )
 
         accessibilityPoll?.cancel()
         accessibilityPoll = Task { [weak self] in
             while !Task.isCancelled {
-                try? await Task.sleep(nanoseconds: 1_500_000_000)
+                try? await Task.sleep(nanoseconds: 2_000_000_000)
                 guard let self, !Task.isCancelled else { return }
                 self.refreshPermissions()
-                if self.accessibilityTrusted {
-                    try? await Task.sleep(nanoseconds: 8_500_000_000)
-                }
+            }
+        }
+    }
+
+    @objc private func accessibilityDidChange() {
+        // The system posts the notification just before AXIsProcessTrusted()
+        // flips, so re-read a few times across the settle window rather than once.
+        Task { @MainActor [weak self] in
+            guard let self else { return }
+            for delay in [0.0, 0.4, 1.2, 3.0] {
+                try? await Task.sleep(nanoseconds: UInt64(delay * 1_000_000_000))
+                self.refreshPermissions()
             }
         }
     }

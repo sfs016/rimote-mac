@@ -74,18 +74,14 @@ if [ -n "$SIGN_ID" ]; then
   codesign --force --options runtime --timestamp \
     --entitlements "$ENTITLEMENTS" --sign "$SIGN_ID" "$APP"
   codesign --verify --strict --verbose=1 "$APP"
-
-  # Notarize + staple the app itself so the very first launch is accepted even
-  # offline (the dmg gets its own ticket later). Zip is just the upload vehicle.
-  if [ -n "$NOTARY_READY" ]; then
-    echo "==> Notarizing the app (so it launches offline)…"
-    APP_ZIP="$DIST/app.zip"
-    ditto -c -k --keepParent "$APP" "$APP_ZIP"
-    notarize_submit "$APP_ZIP"       # registers the app's cdhash with Apple
-    rm -f "$APP_ZIP"
-    xcrun stapler staple "$APP"      # staple ticket onto the .app bundle
-    xcrun stapler validate "$APP"
-  fi
+  # Note: we deliberately do NOT notarize/staple the app *before* packaging.
+  # Notarizing a bundle makes macOS tag it with the SIP-protected
+  # `com.apple.provenance` xattr, and copying such a bundle onto the dmg volume
+  # then trips App Management protection (EPERM) for any process without that
+  # TCC grant. Instead we copy the clean signed app and notarize the whole .dmg
+  # below — that registers the app's cdhash with Apple too, so Gatekeeper
+  # accepts it (verified online on first launch; this app needs the network
+  # anyway). See the dmg notarization step near the end.
 else
   echo "==> No Developer ID identity found — ad-hoc signing (local use only)"
   codesign --force --deep --sign - "$APP"
@@ -103,12 +99,15 @@ DEV="$(hdiutil attach -readwrite -noverify -noautoopen "$DMG_RW" | grep '^/dev/'
 MOUNT="/Volumes/$VOL"
 
 echo "==> Populating"
-cp -R "$APP" "$MOUNT/"
+# The app is only signed (not yet notarized) here, so it carries no provenance
+# xattr. NOTE: if Rimote is already installed in /Applications, macOS App
+# Management protection can block this copy with EPERM unless the running shell
+# (e.g. Terminal) has App Management or Full Disk Access in System Settings →
+# Privacy & Security. Grant that, or run from a Mac where Rimote isn't installed.
+ditto "$APP" "$MOUNT/$APP_NAME.app"
 ln -s /Applications "$MOUNT/Applications"
 mkdir "$MOUNT/.background"
 cp "$BG" "$MOUNT/.background/dmg-bg.png"
-
-# Use the app icon as the volume icon.
 if [ -f "$APP/Contents/Resources/AppIcon.icns" ]; then
   cp "$APP/Contents/Resources/AppIcon.icns" "$MOUNT/.VolumeIcon.icns"
   SetFile -a C "$MOUNT" 2>/dev/null || true
