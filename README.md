@@ -16,9 +16,9 @@
 
 <br/>
 
-<a href="https://github.com/sfs016/rimote-mac/releases/latest/download/Rimote.dmg"><img src="https://img.shields.io/badge/%E2%AC%87%EF%B8%8E%20%20Download%20for%20Mac-000000?style=for-the-badge&logo=apple&logoColor=white" alt="Download Rimote for Mac" height="36" /></a>
+<a href="https://github.com/sfs016/rimote-mac/releases/latest/download/Rimote.dmg"><img src="docs/badge-macos.svg" alt="Download Rimote for macOS" height="55" /></a>
 &nbsp;
-<a href="https://apps.apple.com/app/id6779406773"><img src="https://img.shields.io/badge/Get%20the%20iPhone%20app-000000?style=for-the-badge&logo=appstore&logoColor=white" alt="Get the Rimote iPhone app on the App Store" height="36" /></a>
+<a href="https://apps.apple.com/app/id6779406773"><img src="docs/badge-ios.svg" alt="Download the Rimote iPhone app" height="55" /></a>
 
 <sub>Signed &amp; notarized by Apple &nbsp;·&nbsp; free &nbsp;·&nbsp; <a href="https://rimote.app">rimote.app</a></sub>
 
