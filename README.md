@@ -1,37 +1,60 @@
+<a name="top"></a>
 <div align="center">
 
-<img src="Rimote/Resources/Assets.xcassets/AppIcon.appiconset/icon_128.png" width="88" alt="Rimote app icon" />
+<img src="Rimote/Resources/Assets.xcassets/AppIcon.appiconset/icon_128.png" alt="Rimote app icon" width="88" height="88" />
 
 # Rimote
 
 **Use your iPhone as a remote for your Mac.**<br/>
 **Nothing ever leaves your Wi-Fi.**
 
-[![Latest release](https://img.shields.io/github/v/release/sfs016/rimote-mac?label=release&color=1a1a1a)](https://github.com/sfs016/rimote-mac/releases/latest)
-[![Downloads](https://img.shields.io/github/downloads/sfs016/rimote-mac/total?color=1a1a1a)](https://github.com/sfs016/rimote-mac/releases)
-[![macOS 13+](https://img.shields.io/badge/macOS-13%2B-1a1a1a)](https://github.com/sfs016/rimote-mac/releases/latest/download/Rimote.dmg)
-[![iOS 16+](https://img.shields.io/badge/iPhone-iOS%2016%2B-1a1a1a)](https://apps.apple.com/app/id6779406773)
-[![MIT license](https://img.shields.io/github/license/sfs016/rimote-mac?color=1a1a1a)](LICENSE)
+<a href="https://github.com/sfs016/rimote-mac/releases/latest"><img src="https://img.shields.io/github/v/release/sfs016/rimote-mac?label=release&labelColor=000000&color=white" alt="Latest release" /></a>
+<a href="https://github.com/sfs016/rimote-mac/releases"><img src="https://img.shields.io/github/downloads/sfs016/rimote-mac/total?labelColor=000000&color=white" alt="Downloads" /></a>
+<img src="https://img.shields.io/badge/macOS-13%2B-white?labelColor=000000" alt="macOS 13+" />
+<img src="https://img.shields.io/badge/iOS-16%2B-white?labelColor=000000" alt="iOS 16+" />
+<a href="LICENSE"><img src="https://img.shields.io/github/license/sfs016/rimote-mac?labelColor=000000&color=white" alt="MIT license" /></a>
 
-**[⬇&nbsp;&nbsp;Download Rimote.dmg](https://github.com/sfs016/rimote-mac/releases/latest/download/Rimote.dmg)** &nbsp;·&nbsp; [iPhone app on the App&nbsp;Store](https://apps.apple.com/app/id6779406773) &nbsp;·&nbsp; [rimote.app](https://rimote.app)
+<br/>
 
-<a href="https://rimote.app"><img src="docs/hero.png" width="760" alt="The Rimote iPhone remote next to the tagline 'Your Mac. In your hand.'" /></a>
+<a href="https://github.com/sfs016/rimote-mac/releases/latest/download/Rimote.dmg"><img src="https://img.shields.io/badge/%E2%AC%87%EF%B8%8E%20%20Download%20for%20Mac-000000?style=for-the-badge&logo=apple&logoColor=white" alt="Download Rimote for Mac" height="36" /></a>
+&nbsp;
+<a href="https://apps.apple.com/app/id6779406773"><img src="https://img.shields.io/badge/Get%20the%20iPhone%20app-000000?style=for-the-badge&logo=appstore&logoColor=white" alt="Get the Rimote iPhone app on the App Store" height="36" /></a>
+
+<sub>Signed &amp; notarized by Apple &nbsp;·&nbsp; free &nbsp;·&nbsp; <a href="https://rimote.app">rimote.app</a></sub>
+
+<br/><br/>
+
+<a href="https://rimote.app"><img src="docs/hero.png" alt="The Rimote iPhone remote next to the tagline 'Your Mac. In your hand.'" /></a>
 
 </div>
 
-Sleep, lock, volume, mute, media transport, brightness, and a directional
-clickpad for Keynote — from a SwiftUI iPhone app to a Mac menu-bar agent, over
-a direct WebSocket on your local network. No cloud, no accounts, no telemetry.
-The `.dmg` is signed and notarized by Apple.
+## About
+
+Rimote turns your iPhone into a beautifully simple remote for your Mac — a
+SwiftUI app talking to a tiny AppKit menu-bar agent over a direct WebSocket on
+your own network. It exists because pausing a movie, muting a call blast, or
+clicking through Keynote shouldn't require standing up — and shouldn't require
+a cloud account either. No servers, no analytics, no internet: pair once with
+a PIN and every command stays on your Wi-Fi.
+
+|                   | Control                                                        |
+| ----------------- | -------------------------------------------------------------- |
+| 🌙 **Power**      | Sleep, lock, restart, shut down — one tap                      |
+| 🔊 **Audio**      | Volume up/down and mute, with live state pushed back           |
+| ⏯ **Media**      | Play/pause, next, previous — YouTube, Spotify, Music, anything |
+| ☀️ **Display**    | Screen brightness up/down                                      |
+| 🎯 **Clickpad**   | Arrows + Select — drive Keynote or accept your AI agent's plan |
+| 📡 **Status**     | Mac name, battery, volume — live in the app header             |
 
 ## Install
 
-1. [Download Rimote.dmg](https://github.com/sfs016/rimote-mac/releases/latest/download/Rimote.dmg) and drag **Rimote** to Applications. It lives in the menu bar, not the Dock.
-2. Open the [iPhone app](https://apps.apple.com/app/id6779406773), pick your Mac, and type the 4-digit PIN shown in the menu-bar popover. Done — paired forever.
+1. **[Download Rimote.dmg](https://github.com/sfs016/rimote-mac/releases/latest/download/Rimote.dmg)** and drag **Rimote** to Applications. It lives in the menu bar, not the Dock.
+2. Open the **[iPhone app](https://apps.apple.com/app/id6779406773)**, pick your Mac, and type the 4-digit PIN shown in the menu-bar popover. Done — paired forever.
 
-Grant **Accessibility** when prompted (System Settings → Privacy & Security) —
-it's needed for media, brightness, and arrow keys. Sleep, lock, and volume work
-without it.
+> [!NOTE]
+> Grant **Accessibility** when prompted (System Settings → Privacy &amp; Security) —
+> it's needed for media, brightness, and arrow keys. Sleep, lock, and volume
+> work without it.
 
 ## How it works
 
@@ -85,3 +108,5 @@ command, and rejection of a bad token. See [Tests/README.md](Tests/README.md).
 ## License
 
 [MIT](LICENSE) © 2026 Farhaj Shahid
+
+<div align="right"><a href="#top">back to top ↑</a></div>
