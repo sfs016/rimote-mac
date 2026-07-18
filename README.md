@@ -30,30 +30,30 @@
 
 ## About
 
-Rimote turns your iPhone into a beautifully simple remote for your Mac — a
+Rimote turns your iPhone into a beautifully simple remote for your Mac: a
 SwiftUI app talking to a tiny AppKit menu-bar agent over a direct WebSocket on
 your own network. It exists because pausing a movie, muting a call blast, or
-clicking through Keynote shouldn't require standing up — and shouldn't require
-a cloud account either. No servers, no analytics, no internet: pair once with
+clicking through Keynote shouldn't require standing up, and shouldn't
+require a cloud account either. No servers, no analytics, no internet: pair once with
 a PIN and every command stays on your Wi-Fi.
 
 |                   | Control                                                        |
 | ----------------- | -------------------------------------------------------------- |
-| 🌙 **Power**      | Sleep, lock, restart, shut down — one tap                      |
+| 🌙 **Power**      | Sleep, lock, restart, shut down. One tap                      |
 | 🔊 **Audio**      | Volume up/down and mute, with live state pushed back           |
-| ⏯ **Media**      | Play/pause, next, previous — YouTube, Spotify, Music, anything |
+| ⏯ **Media**      | Play/pause, next, previous. YouTube, Spotify, Music, anything |
 | ☀️ **Display**    | Screen brightness up/down                                      |
-| 🎯 **Clickpad**   | Arrows + Select — drive Keynote or accept your AI agent's plan |
-| 📡 **Status**     | Mac name, battery, volume — live in the app header             |
+| 🎯 **Clickpad**   | Arrows + Select. Drive Keynote or accept your AI agent's plan |
+| 📡 **Status**     | Mac name, battery, volume, live in the app header             |
 
 ## Install
 
 1. **[Download Rimote.dmg](https://github.com/sfs016/rimote-mac/releases/latest/download/Rimote.dmg)** and drag **Rimote** to Applications. It lives in the menu bar, not the Dock.
-2. Open the **[iPhone app](https://apps.apple.com/app/id6779406773)**, pick your Mac, and type the 4-digit PIN shown in the menu-bar popover. Done — paired forever.
+2. Open the **[iPhone app](https://apps.apple.com/app/id6779406773)**, pick your Mac, and type the 4-digit PIN shown in the menu-bar popover. Done. Paired forever.
 
 > [!NOTE]
-> Grant **Accessibility** when prompted (System Settings → Privacy &amp; Security) —
-> it's needed for media, brightness, and arrow keys. Sleep, lock, and volume
+> Grant **Accessibility** when prompted (System Settings → Privacy &amp; Security),
+> which is needed for media, brightness, and arrow keys. Sleep, lock, and volume
 > work without it.
 
 ## How it works
@@ -65,12 +65,12 @@ iPhone (SwiftUI)  ──WebSocket :8765──▶  Mac agent (NWListener)  ──
 ```
 
 - **Zero-config discovery.** The agent advertises `_rimote._tcp` over Bonjour; the phone finds it by name. No IP addresses.
-- **Event-driven, zero polling.** State (volume, mute, battery) is pushed on connect and after each change — idle CPU is ~0%.
+- **Event-driven, zero polling.** State (volume, mute, battery) is pushed on connect and after each change; idle CPU is ~0%.
 - **One frozen wire contract.** Both apps implement [PROTOCOL.md](PROTOCOL.md): pairing handshake, message shapes, and the action whitelist.
 
 ## Security model
 
-- **Hardcoded command whitelist.** The agent executes only the fixed cases of one Swift enum ([RemoteAction.swift](Rimote/Protocol/RemoteAction.swift)). No request string ever reaches a shell — commands run as an absolute executable plus an argument array, never `sh -c`.
+- **Hardcoded command whitelist.** The agent executes only the fixed cases of one Swift enum ([RemoteAction.swift](Rimote/Protocol/RemoteAction.swift)). No request string ever reaches a shell: commands run as an absolute executable plus an argument array, never `sh -c`.
 - **PIN → token auth.** A one-time 4-digit PIN (60-second expiry) bootstraps a 256-bit token, stored `0600` and verified in **constant time on every message** ([TokenStore.swift](Rimote/Pairing/TokenStore.swift)).
 - **LAN-only by design.** The agent opens zero internet connections. "Forget Paired Device" deletes the token immediately.
 
@@ -84,8 +84,8 @@ xcodebuild -project Rimote.xcodeproj -scheme Rimote -configuration Release build
 Or open `Rimote.xcodeproj` in Xcode (15+) and run. Verify it's advertising:
 `dns-sd -B _rimote._tcp`
 
-To produce an installable image, `Scripts/build-dmg.sh` builds `dist/Rimote.dmg`
-— ad-hoc signed by default, Developer ID-signed and notarized automatically when
+To produce an installable image, `Scripts/build-dmg.sh` builds `dist/Rimote.dmg`:
+ad-hoc signed by default, Developer ID-signed and notarized automatically when
 signing credentials are present in the environment.
 
 ## Testing
