@@ -18,7 +18,7 @@
 
 <a href="https://github.com/sfs016/rimote-mac/releases/latest/download/Rimote.dmg"><img src="docs/badge-macos.svg" alt="Download Rimote for macOS" height="55" /></a>
 &nbsp;
-<a href="https://apps.apple.com/app/id6779406773"><img src="docs/badge-ios.svg" alt="Download the Rimote iPhone app" height="55" /></a>
+<a href="https://apps.apple.com/us/app/rimote-mac-remote-control/id6779406773?ppid=757cd6b1-8b9f-47ef-a8ee-c27e2920c5b4"><img src="docs/badge-ios.svg" alt="Download the Rimote iPhone app" height="55" /></a>
 
 <sub>Signed &amp; notarized by Apple &nbsp;·&nbsp; free &nbsp;·&nbsp; <a href="https://rimote.app">rimote.app</a></sub>
 
@@ -49,7 +49,7 @@ a PIN and every command stays on your Wi-Fi.
 ## Install
 
 1. **[Download Rimote.dmg](https://github.com/sfs016/rimote-mac/releases/latest/download/Rimote.dmg)** and drag **Rimote** to Applications. It lives in the menu bar, not the Dock.
-2. Open the **[iPhone app](https://apps.apple.com/app/id6779406773)**, pick your Mac, and type the 4-digit PIN shown in the menu-bar popover. Done. Paired forever.
+2. Open the **[iPhone app](https://apps.apple.com/us/app/rimote-mac-remote-control/id6779406773?ppid=757cd6b1-8b9f-47ef-a8ee-c27e2920c5b4)**, pick your Mac, and type the 4-digit PIN shown in the menu-bar popover. Done. Paired forever.
 
 > [!NOTE]
 > Grant **Accessibility** when prompted (System Settings → Privacy &amp; Security),
